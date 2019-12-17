@@ -3,10 +3,13 @@ import Quiz from "./Quiz.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
-// function replace_url(relative_url) {}
+let dest;
+
+let requestFile = () => {document.querySelector(".file").click()}
 
 function Index() {
   document.body.style = "height: 100%;";
+  dest = '/view/'
   return (
     <Fragment>
       <header>
@@ -43,18 +46,9 @@ function Index() {
 }
 
 class QuizMenu extends React.Component {
-  getJSONData() {
-    let element = document.querySelector(".file");
-    let file = element.files[0];
-    let reader = new FileReader();
-    reader.onload = () => {
-      location.pathname = "/quiz/" + btoa(reader.result);
-    };
-    reader.readAsText(file);
-  }
-
   render() {
     document.body.style = "height: 100%;";
+    dest = "/quiz/";
     return (
       <Fragment>
         <header>
@@ -69,14 +63,6 @@ class QuizMenu extends React.Component {
           </ul>
         </header>
 
-        <input
-          style={{ display: "none" }}
-          type="file"
-          accept="application/json"
-          onChange={this.getJSONData}
-          className="file"
-        />
-
         <ul className="btns">
           <Link to="/quiz/ewogICAgInRpdGxlIjogIiIsCiAgICAiYXV0aG9yIjogIiIsCiAgICAicXVlc3Rpb25zIjogWwogICAgICAgIHsKICAgICAgICAgICAgInRpdGxlIjogIiIsCiAgICAgICAgICAgICJhbnN3ZXJzIjogewogICAgICAgICAgICAgICAgIiI6ICIiCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICBdCn0=">
             <li>
@@ -87,7 +73,7 @@ class QuizMenu extends React.Component {
               </div>
             </li>
           </Link>
-          <a onClick={() => document.querySelector(".file").click()}>
+          <a onClick={requestFile}>
             <li>
               <div style={{ paddingTop: "0.57px" }}>
                 <i class="fonta fas fa-file-signature" />
@@ -102,14 +88,39 @@ class QuizMenu extends React.Component {
   }
 }
 
-function App() {
-  return (
-    <Router>
-      <Route exact path="/" component={Index} />
-      <Route path="/quiz/:quiz" component={Quiz} />
-      <Route path="/quiz-menu" component={QuizMenu} />
-    </Router>
-  );
+class App extends React.Component {
+  getJSONData() {
+    let element = document.querySelector(".file");
+    let file = element.files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+      window.location.pathname = dest + btoa(reader.result);
+    };
+    reader.readAsText(file);
+  }
+  render() {
+    return (
+      <Fragment>
+        <Router>
+          <Route
+            path="/"
+            render={() => (
+              <input
+                type="file"
+                style={{ display: "none" }}
+                className="file"
+                onChange={this.getJSONData}
+                accept="application/json"
+              />
+            )}
+          />
+          <Route exact path="/" component={Index} />
+          <Route path="/quiz/:quiz" component={Quiz} />
+          <Route path="/quiz-menu" component={QuizMenu} />
+        </Router>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
