@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
-import Quiz from "./Quiz.js";
+import React, { Fragment, Component } from "react";
+import CreateQuiz from "./CreateQuiz.js";
+import ViewQuiz from "./ViewQuiz.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
@@ -31,7 +32,7 @@ function Index() {
           </li>
         </Link>
 
-        <a>
+        <a onClick={requestFile}>
           <li>
             <div style={{ paddingTop: "0.57px" }}>
               <i class="fonta fas fa-file-alt" />
@@ -45,7 +46,7 @@ function Index() {
   );
 }
 
-class QuizMenu extends React.Component {
+class QuizMenu extends Component {
   render() {
     document.body.style = "height: 100%;";
     dest = "/quiz/";
@@ -58,7 +59,7 @@ class QuizMenu extends React.Component {
                 <i class="fonta fas fa-arrow-left" /> Back
               </Link>
             </li>
-            <li className="key">Quiz Creator</li>
+            <li className="key">Survey Creator</li>
             <li />
           </ul>
         </header>
@@ -115,7 +116,8 @@ class App extends React.Component {
             )}
           />
           <Route exact path="/" component={Index} />
-          <Route path="/quiz/:quiz" component={Quiz} />
+          <Route path="/quiz/:quiz" component={CreateQuiz} />
+          <Route path="/view/:quiz" component={ViewQuiz} />
           <Route path="/quiz-menu" component={QuizMenu} />
         </Router>
       </Fragment>

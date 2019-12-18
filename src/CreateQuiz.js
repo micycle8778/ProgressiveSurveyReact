@@ -1,5 +1,5 @@
 import React from 'react';
-import Question from './Question.js';
+import CreateQuestion from './CreateQuestion.js';
 import { Link } from 'react-router-dom';
 import './App.css'
 
@@ -22,7 +22,7 @@ function saveAs(uri, filename) {
   }
 }
 
-class Quiz extends React.Component {
+class CreateQuiz extends React.Component {
   randomNum(num) {return Math.floor(Math.random()*num) + 1;}
   makeState = () => {
     document.body.style = "height: auto;"
@@ -192,11 +192,11 @@ class Quiz extends React.Component {
         </header>
 
 
-        <input type="text" name="title" placeholder="Quiz Title" value={this.state.title} onChange={this.onChange} className="title"/> {' '}
-        <input type="text" name="author" placeholder="Quiz Author" value={this.state.author} onChange={this.onChange} className="author"/> <br /><br />
+        <input type="text" name="title" placeholder="Quiz Title" value={this.state.title} onChange={this.onChange} className="create-title"/> {' '}
+        <input type="text" name="author" placeholder="Quiz Author" value={this.state.author} onChange={this.onChange} className="create-author"/> <br /><br />
         
         {this.state.questions.map(q => {
-          return <Question 
+          return <CreateQuestion 
             key={q.id} 
             question={q} 
             delQ={this.delQ}
@@ -215,4 +215,5 @@ class Quiz extends React.Component {
   }
 }
 
-export default Quiz;
+export default CreateQuiz;
+

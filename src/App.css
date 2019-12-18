@@ -144,63 +144,181 @@ header ul .key {
 }
 
 /* 
-* QUIZ CSS 
+* QUIZ CREATOR CSS 
 */
 
 /* Title and Author CSS */
 
-.title, .author {
+.create-title, .create-author {
   margin-bottom: .5rem;
   border-left: #b3b3b3 .125em solid;
 }
 
-.title {
+.create-title {
   margin-top: .5rem;
   margin-left: .5rem;
   width: 85%;
   font-size: 200%;
 }
 
-.author {
+.create-author {
   margin-left: 1rem;
   width: 80%;
   font-size: 150%;
 }
 
-#root > .addbtn {
+#create-root > .addbtn {
   margin-top: .5em;
   margin-bottom: .5em;
 }
 
 /* Question CSS */
 
-.qtitle {
+.create-qtitle {
   margin-left: .5rem;
   font-size: 135%;
   width: 80%
 }
 
-.question > .delbtn {
+.create-question > .delbtn {
   font-size: 165%;
 }
 
-.question .addbtn {
+.create-question .addbtn {
   margin-left: 2em;
 }
 
 /* Answer CSS */
 
-.answers {
+.create-answers {
   width: 95%;
 }
 
-.answer {
+.create-answer {
   font-size: 125%;
   width: 85%;
   margin: .35em;
 }
 
-.answer input {
+.create-answer input {
   font-size: 100%;
   width: 45%;
 }
+
+/*
+* QUIZ VIEWER CSS
+*/
+
+#view-root {
+  margin-left: .5rem;
+  color: #2c2c2c;
+}
+
+.view-title {
+  font-size: 300%;
+  padding: 0;
+  margin: 0;
+  border-bottom: #444 2px solid;
+  display: inline;
+  padding-right: 2.5rem;
+}
+
+.view-preauthor {
+  font-size: 125%;
+  margin: 0;
+  margin-top: .5rem;
+  margin-left: 1.5rem;
+  padding: 0;
+  padding-left: .5rem;
+  display: inline-block;
+}
+
+.view-author {
+  font-size: 125%;
+  margin: 0;
+  margin-top: .5rem;
+  padding: 0;
+  padding-left: .5rem;
+  padding-right: .75rem;
+  border-bottom: #444 2px solid;
+  display: inline-block;
+}
+
+.view-question {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  
+}
+
+.view-question h2 {
+  margin: 0;
+  font-size: 175%;
+  padding-right: 2rem;
+  border-bottom: #333 2px solid;
+  display: inline;
+}
+
+.view-answers {
+  list-style-type: upper-alpha;
+  font-size: 135%;
+  margin: 0;
+  margin-top: 1rem;
+  margin-left: .5rem;
+}
+
+/* The container */
+.view-answer {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: .31rem;
+  cursor: pointer;
+  font-size: 85%
+}
+
+/* Hide the browser's default checkbox */
+.view-answer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.radio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #fff;
+  border: #333 2px solid;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.view-answer:hover input ~ .radio {
+  background-color: #999;
+}
+
+/* When the checkbox is checked, add a blue background */
+.view-answer input:checked ~ .radio {
+  background-color: #333;
+}
+
+.submit {
+  margin-top: .75rem;
+  margin-bottom: 1rem;
+}
+
+.submit:hover {
+  color: #0000ff;
+}
+
+
+
+
+
+
+
