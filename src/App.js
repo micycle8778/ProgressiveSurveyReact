@@ -4,6 +4,8 @@ import ViewQuiz from "./ViewQuiz.js";
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "./App.css";
 
+//Ignore me!
+
 function handleOnFile()  {
   let file = document.querySelector('#file').files[0];
   let reader = new FileReader()
