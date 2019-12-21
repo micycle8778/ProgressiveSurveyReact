@@ -27,7 +27,7 @@ function Index() {
             <div>
               <i class="fonta fas fa-file-signature" />
               <br />
-              Quiz Creator
+              Survey Creator
             </div>
           </li>
         </Link>
@@ -37,7 +37,7 @@ function Index() {
             <div style={{ paddingTop: "0.57px" }}>
               <i class="fonta fas fa-file-alt" />
               <br />
-              Quiz Viewer
+              Survey Viewer
             </div>
           </li>
         </a>
@@ -70,7 +70,7 @@ class QuizMenu extends Component {
               <div>
                 <i class="fonta fas fa-plus" />
                 <br />
-                New Quiz
+                New Survey
               </div>
             </li>
           </Link>
@@ -79,7 +79,7 @@ class QuizMenu extends Component {
               <div style={{ paddingTop: "0.57px" }}>
                 <i class="fonta fas fa-file-signature" />
                 <br />
-                Edit Quiz
+                Edit Survey
               </div>
             </li>
           </a>
@@ -100,6 +100,7 @@ class App extends React.Component {
     reader.readAsText(file);
   }
   render() {
+    document.title = 'Progressive Survey'
     return (
       <Fragment>
         <Router>
