@@ -1,57 +1,70 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component, createElement } from "react";
 import CreateQuiz from "./CreateQuiz.js";
 import ViewQuiz from "./ViewQuiz.js";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "./App.css";
 
-let dest;
+function handleOnFile()  {
+  let file = document.querySelector('#file').files[0];
+  let reader = new FileReader()
+  reader.onload = () => this.props.history.push(this.dest+window.btoa(reader.result)); 
+  reader.readAsText(file)
+}
+function requestFile() { document.querySelector("#file").click(); }
 
-let requestFile = () => {document.querySelector(".file").click()}
-
-function Index() {
-  document.body.style = "height: 100%;";
+class Index extends Component {
   dest = '/view/'
-  return (
-    <Fragment>
-      <header>
-        <ul>
-          <li />
-          <li className="key">Progressive Survey</li>
-          <li />
+  handleOnFile = handleOnFile.bind(this)
+  requestFile = requestFile.bind(this)
+  render() {
+    document.title = 'Progressive Survey'
+    document.body.style = "height: 100%;";
+    return (
+      <Fragment>
+        <input type="file" id="file" style={{display: "none"}} onChange={this.handleOnFile}/>
+        <header>
+          <ul>
+            <li />
+            <li className="key">Progressive Survey</li>
+            <li />
+          </ul>
+        </header>
+
+        <ul className="btns">
+          <Link to="/quiz-menu">
+            <li>
+              <div>
+                <i class="fonta fas fa-file-signature" />
+                <br />
+                Survey Creator
+              </div>
+            </li>
+          </Link>
+
+          <a onClick={this.requestFile}>
+            <li>
+              <div style={{ paddingTop: "0.57px" }}>
+                <i class="fonta fas fa-file-alt" />
+                <br />
+                Survey Viewer
+              </div>
+            </li>
+          </a>
         </ul>
-      </header>
-
-      <ul className="btns">
-        <Link to="/quiz-menu">
-          <li>
-            <div>
-              <i class="fonta fas fa-file-signature" />
-              <br />
-              Survey Creator
-            </div>
-          </li>
-        </Link>
-
-        <a onClick={requestFile}>
-          <li>
-            <div style={{ paddingTop: "0.57px" }}>
-              <i class="fonta fas fa-file-alt" />
-              <br />
-              Survey Viewer
-            </div>
-          </li>
-        </a>
-      </ul>
-    </Fragment>
-  );
+      </Fragment>
+    );
+  }
 }
 
 class QuizMenu extends Component {
+  dest = '/quiz/'
+  handleOnFile = handleOnFile.bind(this)
+  requestFile = requestFile.bind(this)
   render() {
     document.body.style = "height: 100%;";
-    dest = "/quiz/";
     return (
       <Fragment>
+        <input type="file" id="file" style={{display: "none"}} onChange={this.handleOnFile}/>
         <header>
           <ul>
             <li>
@@ -74,7 +87,7 @@ class QuizMenu extends Component {
               </div>
             </li>
           </Link>
-          <a onClick={requestFile}>
+          <a onClick={this.requestFile}>
             <li>
               <div style={{ paddingTop: "0.57px" }}>
                 <i class="fonta fas fa-file-signature" />
@@ -90,33 +103,12 @@ class QuizMenu extends Component {
 }
 
 class App extends React.Component {
-  getJSONData() {
-    let element = document.querySelector(".file");
-    let file = element.files[0];
-    let reader = new FileReader();
-    reader.onload = () => {
-      window.location.pathname = dest + btoa(reader.result);
-    };
-    reader.readAsText(file);
-  }
   render() {
-    document.title = 'Progressive Survey'
+    document.title = "Progressive Survey"
     return (
       <Fragment>
         <Router>
-          <Route
-            path="/"
-            render={() => (
-              <input
-                type="file"
-                style={{ display: "none" }}
-                className="file"
-                onChange={this.getJSONData}
-                accept="application/json"
-              />
-            )}
-          />
-          <Route exact path="/" component={Index} />
+          <Route exact path="/" component={Index }/>
           <Route path="/quiz/:quiz" component={CreateQuiz} />
           <Route path="/view/:quiz" component={ViewQuiz} />
           <Route path="/quiz-menu" component={QuizMenu} />

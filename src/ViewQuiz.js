@@ -1,7 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import ViewQuestion from './ViewQuestion.js';
-import {Link} from 'react-router-dom';
 import Popup from 'reactjs-popup';
+import { Link } from 'react-router-dom'
+
+function Results(props) {
+  return (
+    <div style={{display: props.show ? "block":"none"}} className="results">
+      <h1 className="results-title">{props.title} Results</h1>
+      <p className="results-content">{props.results}</p>
+    </div>
+  )
+}
+
+function ArrayToString(arr) {
+  let return_string = ""
+  arr.forEach(a => {
+    return_string += arr[arr.length-1] === a ? a+".":a+". "
+  })
+  return return_string
+}
 
 class ViewQuiz extends Component {
   randomNum(num) {return Math.floor(Math.random()*num) + 1;}
@@ -13,6 +30,8 @@ class ViewQuiz extends Component {
       title: input.title,
       author: input.author,
       open: false,
+      results: "",
+      show: false,
       questions: input.questions.map(q => {
         let answers = [];
         for (let title in q.answers) {
@@ -61,8 +80,12 @@ class ViewQuiz extends Component {
       return;
     }
 
-    let results = this.state.questions.map((q) => {
+    let results = ArrayToString(this.state.questions.map((q) => {
       return q.answers.filter((a) => a.checked)[0].result;
+    }));
+    this.setState({
+      results: results,
+      show: true
     });
     console.log(results);
   }
@@ -96,7 +119,7 @@ class ViewQuiz extends Component {
             <li />
           </ul>
         </header>
-        <div id="view-root">
+        <div id="view-root" style={{display: !this.state.show ? "block":"none"}}>
           <h1 className="view-title">{this.state.title}</h1><br/>
           <h3 className="view-preauthor">By:</h3><h3 className="view-author">{this.state.author}</h3>
           {this.state.questions.map((q) => {
@@ -108,6 +131,7 @@ class ViewQuiz extends Component {
           })}
           <button className="submit btn" onClick={this.results}>Submit</button>
         </div>
+        <Results show={this.state.show} results={this.state.results} title={this.state.title}/>
       </Fragment>
       );
     }
