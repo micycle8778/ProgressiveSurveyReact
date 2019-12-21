@@ -186,14 +186,14 @@ class CreateQuiz extends React.Component {
         <header className="quiz-header">
           <ul>
             <li><Link to="/quiz-menu"><i class="fas fa-arrow-left"></i> Back</Link></li>
-            <li className="key">Quiz Creator</li>
+            <li className="key">Survey Creator</li>
             <li></li>
           </ul>
         </header>
 
 
-        <input type="text" name="title" placeholder="Quiz Title" value={this.state.title} onChange={this.onChange} className="create-title"/> {' '}
-        <input type="text" name="author" placeholder="Quiz Author" value={this.state.author} onChange={this.onChange} className="create-author"/> <br /><br />
+        <input type="text" name="title" placeholder="Survey Title" value={this.state.title} onChange={this.onChange} className="create-title"/> {' '}
+        <input type="text" name="author" placeholder="Survey Author" value={this.state.author} onChange={this.onChange} className="create-author"/> <br /><br />
         
         {this.state.questions.map(q => {
           return <CreateQuestion 
