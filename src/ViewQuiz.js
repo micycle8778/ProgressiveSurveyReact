@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ViewQuestion from './ViewQuestion.js';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Popup from 'reactjs-popup';
 
 class ViewQuiz extends Component {
   randomNum(num) {return Math.floor(Math.random()*num) + 1;}
@@ -11,6 +12,7 @@ class ViewQuiz extends Component {
     return {
       title: input.title,
       author: input.author,
+      open: false,
       questions: input.questions.map(q => {
         let answers = [];
         for (let title in q.answers) {
@@ -19,13 +21,13 @@ class ViewQuiz extends Component {
             result: q.answers[title],
             checked: false,
             id: this.randomNum(100000)
-          })
+          });
         }
         return {
           title: q.title,
           id: this.randomNum(100000),
           answers: answers
-        }
+        };
       })
     };
   }
@@ -45,6 +47,7 @@ class ViewQuiz extends Component {
       return q
     })})
   }
+
   readyCheck = () => {
     let return_bool
     let results = this.state.questions.forEach((q) => {
@@ -53,16 +56,35 @@ class ViewQuiz extends Component {
     return return_bool
   }
   results = () => {
-    if(!this.readyCheck()) return
+    if(!this.readyCheck()) {
+      this.handleOnOpen();
+      return;
+    }
 
     let results = this.state.questions.map((q) => {
-      return q.answers.filter((a) => a.checked)[0].result
+      return q.answers.filter((a) => a.checked)[0].result;
     });
-    console.log(results)
+    console.log(results);
+  }
+  handleOnOpen = () => {
+    this.setState({open:true});
+  }
+  handleOnClose = () => {
+    this.setState({open:false});
   }
   render() {
+    document.title = this.state.title;
     return (
       <Fragment>
+        <Popup
+        open={this.state.open}
+        closeOnDocumentClick
+        onClose={this.handleOnClose}
+        >
+          <span className="error-content">Hey! You need to answer all the options!</span>
+          <button className="error-close closebtn" onClick={this.handleOnClose}>Okay</button>
+        </Popup>
+
         <header>
           <ul>
             <li>
@@ -87,8 +109,8 @@ class ViewQuiz extends Component {
           <button className="submit btn" onClick={this.results}>Submit</button>
         </div>
       </Fragment>
-      )
+      );
     }
 }
 
-export default ViewQuiz
+export default ViewQuiz;

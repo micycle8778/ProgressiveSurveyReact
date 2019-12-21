@@ -316,7 +316,29 @@ header ul .key {
   color: #0000ff;
 }
 
+/* ERR MODAL */
 
+.popup-content {
+  background: #f88 !important;
+  border: #f44 1px solid !important;
+  border-radius: 5px;
+  color: #c00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.popup-content .closebtn {
+  margin-top: .5rem;
+}
+.closebtn {
+  background: #eee;
+  top: -13px;
+  right: -13px;
+}
+
+.closebtn:hover {
+  background: #fff;
+}
 
 
 
