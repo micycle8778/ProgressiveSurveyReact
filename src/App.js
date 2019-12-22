@@ -106,7 +106,7 @@ class QuizMenu extends Component {
 function App() {
   return (
     <Fragment>
-      <Router>
+      <Router basename="/ProgressiveSurveyReact"> {/* basename prop for GH-Pages only; remove/change if building elsewhere */}
         <Route exact path="/" component={Index }/>
         <Route path="/quiz/:quiz" component={CreateQuiz} />
         <Route path="/view/:quiz" component={ViewQuiz} />

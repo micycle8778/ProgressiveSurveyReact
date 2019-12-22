@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ProgressiveSurveyReact/precache-manifest.ca3f1610d56f55e07af71b60c7fffaff.js"
+  "/ProgressiveSurveyReact/precache-manifest.11c3dfb6d5c83369471962353d8381dc.js"
 );
 
 self.addEventListener('message', (event) => {

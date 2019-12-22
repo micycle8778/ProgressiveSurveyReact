@@ -129,7 +129,7 @@ class ViewQuiz extends Component {
               onChange={this.onChange}
             />
           })}
-          <button className="submit btn" onClick={this.results}>Submit</button>
+          <button className="fin btn" onClick={this.results}>Submit</button>
         </div>
         <Results show={this.state.show} results={this.state.results} title={this.state.title}/>
       </Fragment>
