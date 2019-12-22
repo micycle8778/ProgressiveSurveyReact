@@ -3,7 +3,7 @@ import ViewQuestion from './ViewQuestion.js';
 import Popup from 'reactjs-popup';
 import { Link } from 'react-router-dom'
 
-function Results(props) {
+function Results(props) { //Results component
   return (
     <div style={{display: props.show ? "block":"none"}} className="results">
       <h1 className="results-title">{props.title} Results</h1>
@@ -12,7 +12,7 @@ function Results(props) {
   )
 }
 
-function ArrayToString(arr) {
+function ArrayToString(arr) { //Changes Array to String for results component
   let return_string = ""
   arr.forEach(a => {
     return_string += arr[arr.length-1] === a ? a+".":a+". "
@@ -22,7 +22,7 @@ function ArrayToString(arr) {
 
 class ViewQuiz extends Component {
   randomNum(num) {return Math.floor(Math.random()*num) + 1;}
-  makeState() {
+  makeState() { //Make state, similar to one in CreateQuiz.js
     document.body.style = "height: auto;"
     const input = JSON.parse(window.atob(this.props.match.params.quiz));
 
@@ -51,7 +51,7 @@ class ViewQuiz extends Component {
     };
   }
   state = this.makeState();
-  onChange = (qId, id) => {
+  onChange = (qId, id) => { //When someone clicks on the answer
     this.setState({questions: this.state.questions.map((q) => {
       if(qId === q.id) {
         q.answers = q.answers.map((a) => {
@@ -67,14 +67,14 @@ class ViewQuiz extends Component {
     })})
   }
 
-  readyCheck = () => {
+  readyCheck = () => { //Checks if one of the answers aren't checked.
     let return_bool
     let results = this.state.questions.forEach((q) => {
       return_bool = q.answers.filter((a) => a.checked).length !== 0
     });
     return return_bool
   }
-  results = () => {
+  results = () => { //Outputs the results of the quiz answers
     if(!this.readyCheck()) {
       this.handleOnOpen();
       return;
@@ -89,10 +89,10 @@ class ViewQuiz extends Component {
     });
     console.log(results);
   }
-  handleOnOpen = () => {
+  handleOnOpen = () => { //Opens error modal
     this.setState({open:true});
   }
-  handleOnClose = () => {
+  handleOnClose = () => { //Closes error modal
     this.setState({open:false});
   }
   render() {

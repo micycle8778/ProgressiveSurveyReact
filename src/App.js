@@ -4,16 +4,17 @@ import ViewQuiz from "./ViewQuiz.js";
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "./App.css";
 
-function handleOnFile()  {
-  let file = document.querySelector('#file').files[0];
+function handleOnFile()  { //input[type=file] onChange
+  let file = document.querySelector('#file').files[0]; //grab file
   let reader = new FileReader()
-  reader.onload = () => this.props.history.push(this.dest+window.btoa(reader.result)); 
-  reader.readAsText(file)
+  //when file read, redirect
+  reader.onload = () => this.props.history.push(this.dest+window.btoa(reader.result));
+  reader.readAsText(file) //read file
 }
-function requestFile() { document.querySelector("#file").click(); }
+function requestFile() { document.querySelector("#file").click(); } //when called, click on file input
 
-class Index extends Component {
-  dest = '/view/'
+class Index extends Component { //First thing user sees
+  dest = '/view/' //Prefix of redirection
   handleOnFile = handleOnFile.bind(this)
   requestFile = requestFile.bind(this)
   render() {
@@ -102,20 +103,18 @@ class QuizMenu extends Component {
   }
 }
 
-class App extends React.Component {
-  render() {
-    document.title = "Progressive Survey"
-    return (
-      <Fragment>
-        <Router>
-          <Route exact path="/" component={Index }/>
-          <Route path="/quiz/:quiz" component={CreateQuiz} />
-          <Route path="/view/:quiz" component={ViewQuiz} />
-          <Route path="/quiz-menu" component={QuizMenu} />
-        </Router>
-      </Fragment>
-    );
-  }
+function App() {
+  return (
+    <Fragment>
+      <Router>
+        <Route exact path="/" component={Index }/>
+        <Route path="/quiz/:quiz" component={CreateQuiz} />
+        <Route path="/view/:quiz" component={ViewQuiz} />
+        <Route path="/quiz-menu" component={QuizMenu} />
+      </Router>
+    </Fragment>
+  );
 }
+
 
 export default App;
