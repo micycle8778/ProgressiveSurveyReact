@@ -1,20 +1,20 @@
 import React from 'react'
-import Answer from './Answer.js';
+import CreateAnswer from './CreateAnswer.js';
 
-function Question(props) {
+function CreateQuestion(props) {
   let {question} = props
   return (
-    <div className="question">
+    <div className="create-question">
       <input 
         type='text' 
         value={question.title} 
         placeholder="Question Title"
         onChange={e => {props.onChange(e.target.value, question.id)}}
-        className="qtitle"
+        className="create-qtitle"
       /> <button className="delq delbtn btn" onClick={() => props.delQ(question.id)}>X</button>
-      <ol className="answers" type="A">
+      <ol className="create-answers" type="A">
         {question.answers.map(a => {
-          return <li className="answer"><Answer 
+          return <li className="create-answer"><CreateAnswer 
             answer={a} 
             key={a.id}
             onChange={e => props.onAnswerChange(question.id, a.id, e.target.name, e.target.value)}
@@ -27,4 +27,4 @@ function Question(props) {
   )
 }
 
-export default Question
+export default CreateQuestion

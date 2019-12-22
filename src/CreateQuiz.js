@@ -1,9 +1,9 @@
 import React from 'react';
-import Question from './Question.js';
+import CreateQuestion from './CreateQuestion.js';
 import { Link } from 'react-router-dom';
 import './App.css'
 
-function saveAs(uri, filename) {
+function saveAs(uri, filename) { //Downloads survey for user
   var link = document.createElement('a');
   if (typeof link.download === 'string') {
     link.href = uri;
@@ -22,13 +22,13 @@ function saveAs(uri, filename) {
   }
 }
 
-class Quiz extends React.Component {
-  randomNum(num) {return Math.floor(Math.random()*num) + 1;}
-  makeState = () => {
+class CreateQuiz extends React.Component { //Main quiz
+  randomNum(num) {return Math.floor(Math.random()*num) + 1;} //Random number
+  makeState = () => { //Make state from URL
     document.body.style = "height: auto;"
-    const input = JSON.parse(window.atob(this.props.match.params.quiz));
+    const input = JSON.parse(window.atob(this.props.match.params.quiz)); //Turn the URL to JSON
 
-    return {
+    return { //Turn ProgressiveSurvey output into state
       title: input.title,
       author: input.author,
       questions: input.questions.map(q => {
@@ -48,9 +48,9 @@ class Quiz extends React.Component {
       })
     };
   }
-	state = this.makeState();
+	state = this.makeState(); //This quiz's state is now the output of makeState()
 
-  genAnswer = () => {
+  genAnswer = () => { //Generate answer to append to state
     return  {
       title: '', 
       result: '', 
@@ -58,8 +58,7 @@ class Quiz extends React.Component {
     }
   }
   
-  // Add a question
-  addQ = () => { 
+  addQ = () => { //Add question to state
     this.setState(
       {questions: [
         ...this.state.questions,
@@ -72,22 +71,21 @@ class Quiz extends React.Component {
     );
   }
 
-  // Remove a question
-  delQ = (qId) => {
+  delQ = (qId) => { //Take question out of state
     this.setState(
       {questions: this.state.questions.filter(q => {return q.id !== qId})}
     );
   }
 
-  // Update the title and author
-  onChange = (e) => {
+  
+  onChange = (e) => { // Update the title and author
     this.setState({
       [e.target.name]: e.target.value
     });
   }
   
-  // Add Answer option
-  addA = (id) => {
+  
+  addA = (id) => { //Add Answer option to state
     this.setState({questions: this.state.questions.map(q => {
       if(q.id === id) {
         console.log(id);
@@ -109,8 +107,8 @@ class Quiz extends React.Component {
     })});
   }
 
-  // Remove Answer option
-  delA = (qId, aId) => {
+  
+  delA = (qId, aId) => { //Remove Answer option from state
     this.setState({questions: this.state.questions.map(q => {
       if(q.id === qId) {
         return {
@@ -124,7 +122,7 @@ class Quiz extends React.Component {
     })});
   }
 
-  changeQuestionTitle = (title, id) => {
+  changeQuestionTitle = (title, id) => { //Change question state
     this.setState({questions: this.state.questions.map(q => {
       if(q.id === id) {
         return {
@@ -138,7 +136,7 @@ class Quiz extends React.Component {
     })});
   }
 
-  changeAnswerData = (qId, aId, type, data) => {
+  changeAnswerData = (qId, aId, type, data) => { //Change answer state
     this.setState({questions: this.state.questions.map(q => {
       if (q.id === qId) {
         return {
@@ -162,7 +160,7 @@ class Quiz extends React.Component {
     })});
   }
 
-  compile = () => {
+  compile = () => { //Output quiz data
     let quiz = this.state
     quiz.questions = quiz.questions.map(q => {
       let answers = {}
@@ -174,10 +172,7 @@ class Quiz extends React.Component {
         answers: answers
       }
     });
-
-    
-
-    saveAs("data:application/json;charset=utf-8;base64,"+window.btoa(unescape(encodeURIComponent(JSON.stringify(quiz,"",4)))), quiz.title+".json");
+    saveAs("data:application/json;charset=utf-8;base64,"+window.btoa(unescape(encodeURIComponent(JSON.stringify(quiz,"")))), quiz.title+".json");
   }
 
   render() {
@@ -186,17 +181,17 @@ class Quiz extends React.Component {
         <header className="quiz-header">
           <ul>
             <li><Link to="/quiz-menu"><i class="fas fa-arrow-left"></i> Back</Link></li>
-            <li className="key">Quiz Creator</li>
+            <li className="key">Survey Creator</li>
             <li></li>
           </ul>
         </header>
 
 
-        <input type="text" name="title" placeholder="Quiz Title" value={this.state.title} onChange={this.onChange} className="title"/> {' '}
-        <input type="text" name="author" placeholder="Quiz Author" value={this.state.author} onChange={this.onChange} className="author"/> <br /><br />
+        <input type="text" name="title" placeholder="Survey Title" value={this.state.title} onChange={this.onChange} className="create-title"/> {' '}
+        <input type="text" name="author" placeholder="Survey Author" value={this.state.author} onChange={this.onChange} className="create-author"/> <br /><br />
         
         {this.state.questions.map(q => {
-          return <Question 
+          return <CreateQuestion 
             key={q.id} 
             question={q} 
             delQ={this.delQ}
@@ -215,4 +210,5 @@ class Quiz extends React.Component {
   }
 }
 
-export default Quiz;
+export default CreateQuiz;
+

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Answer(props) {
+function CreateAnswer(props) {
   let {answer} = props
   return (
     <React.Fragment>
@@ -25,4 +25,4 @@ function Answer(props) {
 }
 
 
-export default Answer
+export default CreateAnswer
