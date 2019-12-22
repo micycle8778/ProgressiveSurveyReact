@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateQuestion from './CreateQuestion.js';
 import { Link } from 'react-router-dom';
-import './App.css'
+import Popup from 'reactjs-popup'
 
 function saveAs(uri, filename) { //Downloads survey for user
   var link = document.createElement('a');
@@ -31,6 +31,7 @@ class CreateQuiz extends React.Component { //Main quiz
     return { //Turn ProgressiveSurvey output into state
       title: input.title,
       author: input.author,
+      open: false,
       questions: input.questions.map(q => {
         let answers = [];
         for (let title in q.answers) {
@@ -159,8 +160,26 @@ class CreateQuiz extends React.Component { //Main quiz
       }
     })});
   }
+  
+  readyCheck = () => {
+    let return_val = true;
+
+    this.state.questions.forEach(q => {
+      q.answers.forEach(a => {
+        let answers = Array(q.answers) //Copy the answers array
+        return_val = answers.filter(ans => ans.title == a.title).length === 1;
+      });
+    });
+    
+    //console.log(return_val)
+    return return_val;
+  }
 
   compile = () => { //Output quiz data
+    if (!this.readyCheck()) {
+      this.handleOnOpen();
+      return;
+    }
     let quiz = this.state
     quiz.questions = quiz.questions.map(q => {
       let answers = {}
@@ -174,10 +193,27 @@ class CreateQuiz extends React.Component { //Main quiz
     });
     saveAs("data:application/json;charset=utf-8;base64,"+window.btoa(unescape(encodeURIComponent(JSON.stringify(quiz,"")))), quiz.title+".json");
   }
+  
+  handleOnOpen = () => {
+    this.setState({open: true})
+  }
+  
+  handleOnClose = () => {
+    this.setState({open: false})
+  }
 
   render() {
     return (
       <React.Fragment>
+        <Popup
+        open={this.state.open}
+        closeOnDocumentClick
+        onClose={this.handleOnClose}
+        >
+          <span className="error-content">Hey! Any given question cannot have duplicate answer options!</span>
+          <button className="error-close closebtn" onClick={this.handleOnClose}>Okay</button>
+        </Popup>
+      
         <header className="quiz-header">
           <ul>
             <li><Link to="/quiz-menu"><i class="fas fa-arrow-left"></i> Back</Link></li>

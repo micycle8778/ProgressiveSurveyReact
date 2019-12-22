@@ -374,14 +374,15 @@ header ul .key {
   border: #c00 2px solid !important;
   border-radius: 5px;
   color: #c00;
-  font-weight: bold;
+  font-size: 110%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .popup-content button {
-  background-color: #f005
+  background-color: #f005;
+  font-size: 105%;
 }
 
 .popup-content button:hover{

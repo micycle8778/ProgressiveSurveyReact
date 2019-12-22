@@ -15,6 +15,7 @@ function Results(props) { //Results component
 function ArrayToString(arr) { //Changes Array to String for results component
   let return_string = ""
   arr.forEach(a => {
+    if (a == "") return
     return_string += arr[arr.length-1] === a ? a+".":a+". "
   })
   return return_string
@@ -22,6 +23,7 @@ function ArrayToString(arr) { //Changes Array to String for results component
 
 class ViewQuiz extends Component {
   randomNum(num) {return Math.floor(Math.random()*num) + 1;}
+  
   makeState() { //Make state, similar to one in CreateQuiz.js
     document.body.style = "height: auto;"
     const input = JSON.parse(window.atob(this.props.match.params.quiz));
@@ -51,6 +53,7 @@ class ViewQuiz extends Component {
     };
   }
   state = this.makeState();
+  
   onChange = (qId, id) => { //When someone clicks on the answer
     this.setState({questions: this.state.questions.map((q) => {
       if(qId === q.id) {
@@ -74,6 +77,7 @@ class ViewQuiz extends Component {
     });
     return return_bool
   }
+  
   results = () => { //Outputs the results of the quiz answers
     if(!this.readyCheck()) {
       this.handleOnOpen();
@@ -89,12 +93,15 @@ class ViewQuiz extends Component {
     });
     console.log(results);
   }
+  
   handleOnOpen = () => { //Opens error modal
     this.setState({open:true});
   }
+  
   handleOnClose = () => { //Closes error modal
     this.setState({open:false});
   }
+  
   render() {
     document.title = this.state.title;
     return (
