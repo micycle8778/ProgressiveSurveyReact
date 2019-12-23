@@ -54,9 +54,8 @@ button {
   border: none;
   border-radius: 5px;
   background: transparent;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   text-align: center;
-  font-size: 125%;
 }
 
 button:hover {
@@ -69,6 +68,7 @@ button:hover {
 
 .delbtn {
   color: #d00;
+  font-size: 1.65rem;
 }
 
 .addbtn {
@@ -109,7 +109,7 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 175%;
+  font-size: 1.75rem;
 }
 
 header ul {
@@ -154,7 +154,7 @@ header ul .key {
   height: 100%;
   width: 50%;
   float: left;
-  font-size: 400%;
+  font-size: 4rem;
 }
 
 .btns a:hover {
@@ -185,13 +185,13 @@ header ul .key {
   margin-top: .5rem;
   margin-left: .5rem;
   width: 85%;
-  font-size: 200%;
+  font-size: 2rem;
 }
 
 .create-author {
   margin-left: 1rem;
   width: 80%;
-  font-size: 150%;
+  font-size: 1.5rem;
 }
 
 #create-root > .addbtn {
@@ -203,12 +203,8 @@ header ul .key {
 
 .create-qtitle {
   margin-left: .5rem;
-  font-size: 135%;
+  font-size: 1.35rem;
   width: 80%
-}
-
-.create-question > .delbtn {
-  font-size: 165%;
 }
 
 .create-question .addbtn {
@@ -223,13 +219,13 @@ header ul .key {
 }
 
 .create-answer {
-  font-size: 125%;
+  font-size: 1.35rem;
   width: 85%;
   margin: .35em;
 }
 
 .create-answer input {
-  font-size: 100%;
+  font-size: 1.25rem;
   width: 45%;
 }
 
@@ -243,7 +239,7 @@ header ul .key {
 }
 
 .view-title {
-  font-size: 300%;
+  font-size: 2.8rem;
   padding: 0;
   margin: 0;
   border-bottom: #444 2px solid;
@@ -252,7 +248,7 @@ header ul .key {
 }
 
 .view-preauthor {
-  font-size: 125%;
+  font-size: 1.25rem;
   margin: 0;
   margin-top: .5rem;
   margin-left: 1.5rem;
@@ -262,7 +258,7 @@ header ul .key {
 }
 
 .view-author {
-  font-size: 125%;
+  font-size: 1.25rem;
   margin: 0;
   margin-top: .5rem;
   padding: 0;
@@ -280,7 +276,7 @@ header ul .key {
 
 .view-question h2 {
   margin: 0;
-  font-size: 175%;
+  font-size: 1.75rem;
   padding-right: 2rem;
   border-bottom: #333 2px solid;
   display: inline;
@@ -288,7 +284,7 @@ header ul .key {
 
 .view-answers {
   list-style-type: upper-alpha;
-  font-size: 135%;
+  font-size: 1.35rem;
   margin: 0;
   margin-top: 1rem;
   margin-left: .5rem;
@@ -301,7 +297,7 @@ header ul .key {
   padding-left: 2rem;
   margin-bottom: .31rem;
   cursor: pointer;
-  font-size: 85%
+  font-size: 87%;
 }
 
 /* Hide the browser's default checkbox */
@@ -359,7 +355,7 @@ header ul .key {
 .results-content {
   margin: 0;
   margin-left: 1.25rem;
-  font-size: 125%;
+  font-size: 1.25rem;
 }
 
 #view-root > .fin {
@@ -374,7 +370,7 @@ header ul .key {
   border: #c00 2px solid !important;
   border-radius: 5px;
   color: #c00;
-  font-size: 110%;
+  font-size: 1.1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
