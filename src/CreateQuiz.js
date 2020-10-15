@@ -3,6 +3,12 @@ import CreateQuestion from './CreateQuestion.js';
 import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup'
 
+const errors = {
+	0: null,
+	1: "No question can have duplicate options.",
+	2: "All questions must have at least 2 options."
+}
+
 function saveAs(uri, filename) { //Downloads survey for user
   var link = document.createElement('a');
   if (typeof link.download === 'string') {
@@ -165,9 +171,12 @@ class CreateQuiz extends React.Component { //Main quiz
     let return_val = true;
 
     this.state.questions.forEach(q => {
+      console.log(q);
       q.answers.forEach(a => {
-        let answers = Array(q.answers) //Copy the answers array
-        return_val = answers.filter(ans => ans.title == a.title).length === 1;
+        let answers = q.answers.copyWithin() //Copy the answers array
+	let algo_arr = answers.filter(ans => ans.title === a.title)
+        console.log(algo_arr, answers);
+	return_val = algo_arr.length === 1;
       });
     });
     

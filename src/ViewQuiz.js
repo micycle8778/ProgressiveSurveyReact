@@ -15,7 +15,7 @@ function Results(props) { //Results component
 function ArrayToString(arr) { //Changes Array to String for results component
   let return_string = ""
   arr.forEach(a => {
-    if (a == "") return
+    if (a === "") return
     return_string += arr[arr.length-1] === a ? a+".":a+". "
   })
   return return_string
@@ -72,7 +72,7 @@ class ViewQuiz extends Component {
 
   readyCheck = () => { //Checks if one of the answers aren't checked.
     let return_bool
-    let results = this.state.questions.forEach((q) => {
+    this.state.questions.forEach((q) => {
       return_bool = q.answers.filter((a) => a.checked).length !== 0
     });
     return return_bool

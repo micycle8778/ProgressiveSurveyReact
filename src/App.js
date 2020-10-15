@@ -1,7 +1,7 @@
-import React, { Fragment, Component, createElement } from "react";
+import React, { Fragment, Component } from "react";
 import CreateQuiz from "./CreateQuiz.js";
 import ViewQuiz from "./ViewQuiz.js";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
 function handleOnFile()  { //input[type=file] onChange
